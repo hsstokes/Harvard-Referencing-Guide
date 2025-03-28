@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvard Referencing Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: {
+                    'mono': ['"Courier New"', 'monospace'],
+                },
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#1E88E5',
+                            dark: '#64B5F6',
+                            light: '#1565C0'
+                        },
+                        secondary: {
+                            DEFAULT: '#4CAF50',
+                            light: '#81C784'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: white;
+            background-image:
+                linear-gradient(#87CEEB 1px, transparent 1px),
+                linear-gradient(90deg, #87CEEB 1px, transparent 1px),
+                linear-gradient(#98FB98 1px, transparent 1px),
+                linear-gradient(90deg, #98FB98 1px, transparent 1px),
+                linear-gradient(rgba(135, 206, 235, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(135, 206, 235, 0.3) 1px, transparent 1px);
+            background-size: 
+                50px 50px,
+                50px 50px,
+                10px 10px,
+                10px 10px,
+                25px 25px,
+                25px 25px;
+        }
+        
+        .dark body {
+            background-color: #1a202c;
+            background-image:
+                linear-gradient(rgba(135, 206, 235, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(135, 206, 235, 0.3) 1px, transparent 1px),
+                linear-gradient(rgba(152, 251, 152, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(152, 251, 152, 0.3) 1px, transparent 1px);
+            background-size: 
+                50px 50px,
+                50px 50px,
+                10px 10px,
+                10px 10px;
+        }
+        
+        /* Paper-like elements */
+        .paper {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #d1d5db;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .paper {
+            background-color: rgba(30, 41, 59, 0.9);
+            border: 1px solid #4b5563;
+        }
+    </style>
+</head>
+<body class="font-mono text-gray-800 dark:text-gray-100 transition-colors duration-200">
+    <!-- Check for dark mode preference -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <div class="min-h-screen flex flex-col">
+        <header class="bg-secondary dark:bg-secondary-light text-white p-4 shadow-lg relative">
+            <!-- Decorative paper clips -->
+            <div class="absolute top-0 left-4 w-6 h-12 bg-gray-400 dark:bg-gray-500 rounded-b-lg transform -translate-y-2"></div>
+            <div class="absolute top-0 right-4 w-6 h-12 bg-gray-400 dark:bg-gray-500 rounded-b-lg transform -translate-y-2"></div>
+            
+            <div class="container mx-auto">
+                <h1 class="text-2xl md:text-3xl font-bold font-mono">Harvard Referencing Guide</h1>
+                <p class="text-sm md:text-base mt-1 text-gray-100 font-mono">Master academic citations with ease</p>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-4 py-6 flex-grow">
+            <!-- Tabs -->
+            <div class="mb-6 border-b border-gray-200 dark:border-gray-700">
+                <ul id="tabs" class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                    <li class="mr-2" role="presentation">
+                        <button id="guide-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="guide" aria-selected="true">
+                            Guide
+                        </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button id="generator-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="generator" aria-selected="false">
+                            Reference Generator
+                        </button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button id="examples-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="examples" aria-selected="false">
+                            Examples
+                        </button>
+                    </li>
+                    <li role="presentation">
+                        <button id="ask-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="ask" aria-selected="false">
+                            Ask About Citations
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Tab Content -->
+            <div id="tab-content">
+                <!-- Guide Tab -->
+                <div id="guide" class="tab-pane" role="tabpanel" aria-labelledby="guide-tab">
+                    <div class="paper bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold mb-4 text-secondary dark:text-secondary-light">Harvard Referencing Basics</h2>
+                        
+                        <div class="space-y-6">
+                            <section>
+                                <h3 class="text-xl font-semibold mb-2">What is Harvard Referencing?</h3>
+                                <p>Harvard referencing is a citation style that uses the author-date system. It's widely used in academic writing across various disciplines, particularly in the humanities and social sciences.</p>
+                                <p class="mt-2">Unlike some other citation styles, Harvard referencing doesn't have a single definitive guide, so there can be slight variations between institutions. Always check your institution's specific guidelines.</p>
+                            </section>
+                            
+                            <section>
+                                <h3 class="text-xl font-semibold mb-2">Key Components</h3>
+                                <div class="grid md:grid-cols-2 gap-4 mt-3">
+                                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                        <h4 class="font-medium text-lg mb-2">In-text Citations</h4>
+                                        <p>These appear within the body of your text when you quote, paraphrase, or summarize someone else's work.</p>
+                                        <div class="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600">
+                                            <p class="font-medium">Format:</p>
+                                            <p class="mt-1">(Author's surname, Year of publication, Page number if applicable)</p>
+                                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Example: (Smith, 2020, p. 45)</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                        <h4 class="font-medium text-lg mb-2">Reference List</h4>
+                                        <p>A comprehensive list of all sources cited in your work, placed at the end of your document.</p>
+                                        <div class="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600">
+                                            <p class="font-medium">Key Features:</p>
+                                            <ul class="list-disc ml-5 mt-1 text-sm">
+                                                <li>Alphabetical order by author's surname</li>
+                                                <li>Includes full publication details</li>
+                                                <li>Formatted with hanging indentation</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <section>
+                                <h3 class="text-xl font-semibold mb-3">General Rules</h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                                        <h4 class="font-medium">Authors</h4>
+                                        <ul class="list-disc ml-5 mt-1">
+                                            <li>One author: (Smith, 2020)</li>
+                                            <li>Two authors: (Smith and Jones, 2020)</li>
+                                            <li>Three or more authors: (Smith et al., 2020)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                                        <h4 class="font-medium">Multiple Sources</h4>
+                                        <p>When citing multiple sources in one set of parentheses, list them in chronological order and separate with semicolons:</p>
+                                        <p class="mt-1 text-sm italic">(Brown, 2015; Smith, 2018; Jones, 2020)</p>
+                                    </div>
+                                    
+                                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                                        <h4 class="font-medium">Page Numbers</h4>
+                                        <p>Include page numbers when directly quoting or referring to a specific part of a source:</p>
+                                        <p class="mt-1 text-sm italic">(Smith, 2020, p. 45) or (Smith, 2020, pp. 45-47)</p>
+                                    </div>
+                                    
+                                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                                        <h4 class="font-medium">No Author</h4>
+                                        <p>Use the title of the work (or a shortened version) in place of the author:</p>
+                                        <p class="mt-1 text-sm italic">(Annual Report, 2020)</p>
+                                    </div>
+                                    
+                                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                                        <h4 class="font-medium">Multiple Works by Same Author in Same Year</h4>
+                                        <p>Add lowercase letters after the year:</p>
+                                        <p class="mt-1 text-sm italic">(Smith, 2020a) and (Smith, 2020b)</p>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <section>
+                                <h3 class="text-xl font-semibold mb-3">Common Mistakes to Avoid</h3>
+                                <div class="space-y-2">
+                                    <div class="flex items-start">
+                                        <span class="text-red-500 mr-2">✗</span>
+                                        <p>Forgetting to include page numbers for direct quotes</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-red-500 mr-2">✗</span>
+                                        <p>Inconsistent formatting in the reference list</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-red-500 mr-2">✗</span>
+                                        <p>Using "et al." in the reference list (list all authors in the reference list)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-red-500 mr-2">✗</span>
+                                        <p>Incorrect placement of punctuation in citations and references</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-red-500 mr-2">✗</span>
+                                        <p>Inconsistency in author names (e.g., using "Smith" in one citation and "J. Smith" in another)</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reference Generator Tab -->
+                <div id="generator" class="tab-pane hidden" role="tabpanel" aria-labelledby="generator-tab">
+                    <div class="paper bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold mb-4 text-secondary dark:text-secondary-light">Reference Generator</h2>
+                        
+                        <div class="mb-6">
+                            <label for="source-type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Source Type:</label>
+                            <select id="source-type" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base">
+                                <option value="book">Book</option>
+                                <option value="journal">Journal Article</option>
+                                <option value="website">Website</option>
+                                <option value="newspaper">Newspaper Article</option>
+                                <option value="ebook">E-Book</option>
+                            </select>
+                        </div>
+                        
+                        <div id="form-fields" class="space-y-4 mb-6">
+                            <!-- Form fields will be added dynamically -->
+                        </div>
+                        
+                        <div class="mb-8">
+                            <button id="generate-button" class="w-full py-3 px-6 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-lg transition-colors duration-200">
+                                Generate Reference
+                            </button>
+                        </div>
+                        
+                        <div id="reference-output" class="mt-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 hidden">
+                            <h3 class="font-semibold text-xl mb-4">Your Harvard Reference:</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-medium mb-2">In-text Citation:</h4>
+                                    <p id="in-text-citation" class="p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"></p>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-2">Reference List Entry:</h4>
+                                    <p id="reference-list-entry" class="p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"></p>
+                                </div>
+                                <button id="copy-reference" class="mt-4 py-2 px-4 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-lg transition-colors duration-200 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                    </svg>
+                                    Copy Reference
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Examples Tab -->
+                <div id="examples" class="tab-pane hidden" role="tabpanel" aria-labelledby="examples-tab">
+                    <div class="paper bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold mb-4 text-secondary dark:text-secondary-light">Reference Examples</h2>
+                        
+                        <div class="mb-4">
+                            <label for="example-filter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filter by Source Type:</label>
+                            <select id="example-filter" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base">
+                                <option value="all">All Source Types</option>
+                                <option value="book">Books</option>
+                                <option value="journal">Journal Articles</option>
+                                <option value="website">Websites</option>
+                                <option value="newspaper">Newspaper Articles</option>
+                                <option value="other">Other Sources</option>
+                            </select>
+                        </div>
+                        
+                        <div id="examples-container" class="space-y-6 mt-6">
+                            <!-- Examples will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ask About Citations Tab -->
+                <div id="ask" class="tab-pane hidden" role="tabpanel" aria-labelledby="ask-tab">
+                    <div class="paper bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold mb-4 text-secondary dark:text-secondary-light">Ask About Citations</h2>
+                        <p class="mb-5">Have a specific question about Harvard referencing? Ask Claude AI for help.</p>
+                        
+                        <div class="mb-6">
+                            <label for="citation-question" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Citation Question:</label>
+                            <textarea 
+                                id="citation-question" 
+                                placeholder="For example: How do I cite a YouTube video? How do I reference a chapter in an edited book?"
+                                class="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base min-h-[150px] resize-y focus:outline-none focus:ring-2 focus:ring-secondary"
+                            ></textarea>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <button 
+                                id="ask-button" 
+                                class="w-full py-3 px-6 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-lg transition-colors duration-200"
+                            >
+                                Get Citation Help
+                            </button>
+                        </div>
+                        
+                        <div id="loading-indicator" class="hidden">
+                            <div class="flex items-center justify-center p-6">
+                                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-secondary"></div>
+                            </div>
+                            <p class="text-center text-gray-500 dark:text-gray-400">Getting expert citation advice...</p>
+                        </div>
+                        
+                        <div id="answer-container" class="mt-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 hidden">
+                            <h3 class="font-semibold text-xl mb-4">Citation Help:</h3>
+                            <div id="answer-content" class="prose prose-lg max-w-none dark:prose-invert overflow-auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-gray-100 dark:bg-gray-800 py-4 mt-8">
+            <div class="container mx-auto px-4 text-center text-sm text-gray-600 dark:text-gray-400">
+                <p>This app helps students learn and master Harvard referencing for academic writing.</p>
+                <p class="mt-2">Remember to always check your institution's specific Harvard style guide.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Data for examples
+        const referenceExamples = [
+            {
+                type: "book",
+                title: "Book with a Single Author",
+                inTextCitation: "(Smith, 2020, p. 45)",
+                referenceList: "Smith, J. (2020) <i>The Complete Guide to Academic Writing</i>. London: Academic Press.",
+                explanation: "Include the author's surname and initials, year of publication in parentheses, book title in italics, place of publication, and publisher."
+            },
+            {
+                type: "book",
+                title: "Book with Multiple Authors",
+                inTextCitation: "(Smith and Jones, 2019) or (Smith et al., 2019) for three or more authors",
+                referenceList: "Smith, J., Jones, A. and Brown, T. (2019) <i>Research Methods for Beginners</i>. 3rd edn. New York: Scholar Publishing.",
+                explanation: "List all authors in the reference list, separated by commas (with 'and' before the final author). Include edition number if not the first edition."
+            },
+            {
+                type: "book",
+                title: "E-Book",
+                inTextCitation: "(Johnson, 2021)",
+                referenceList: "Johnson, M. (2021) <i>Digital Learning Strategies</i>. Available at: https://doi.org/10.4324/9780429456789 (Accessed: 15 June 2023).",
+                explanation: "For e-books, include the DOI (preferred) or URL with an accessed date."
+            },
+            {
+                type: "journal",
+                title: "Journal Article",
+                inTextCitation: "(Wilson, 2022, p. 78)",
+                referenceList: "Wilson, K. (2022) 'The impact of social media on student learning', <i>Journal of Educational Technology</i>, 15(2), pp. 75-89. doi: 10.1234/jet.2022.123456.",
+                explanation: "Include the author's surname and initials, year of publication in parentheses, article title in single quotes, journal title in italics, volume, issue number in parentheses, page range, and DOI (if available)."
+            },
+            {
+                type: "journal",
+                title: "Online Journal Article",
+                inTextCitation: "(Garcia et al., 2023)",
+                referenceList: "Garcia, C., Martinez, S. and Chen, W. (2023) 'Climate change and coastal communities', <i>Environmental Studies Review</i>, 12(3). Available at: https://doi.org/10.5678/esr.2023.123 (Accessed: 10 July 2023).",
+                explanation: "For online-only journals without page numbers, include the DOI or URL with access date."
+            },
+            {
+                type: "website",
+                title: "Website",
+                inTextCitation: "(World Health Organization, 2023)",
+                referenceList: "World Health Organization (2023) <i>Mental health in the workplace</i>. Available at: https://www.who.int/mental-health/workplace (Accessed: 5 August 2023).",
+                explanation: "Include the organization or author name, year, page title in italics, 'Available at:' followed by the URL, and the date accessed in parentheses."
+            },
+            {
+                type: "newspaper",
+                title: "Newspaper Article",
+                inTextCitation: "(Thompson, 2023)",
+                referenceList: "Thompson, P. (2023) 'Economic outlook remains uncertain', <i>The Daily News</i>, 12 June, p. 4.",
+                explanation: "Include the author's surname and initials, year, article title in single quotes, newspaper name in italics, date of publication, and page number if available."
+            },
+            {
+                type: "newspaper",
+                title: "Online Newspaper Article",
+                inTextCitation: "(Harris, 2023)",
+                referenceList: "Harris, J. (2023) 'New educational policies announced', <i>The Chronicle</i>, 28 July. Available at: https://www.thechronicle.com/education/policies (Accessed: 30 July 2023).",
+                explanation: "For online newspaper articles, include the URL and access date."
+            },
+            {
+                type: "other",
+                title: "Government Report",
+                inTextCitation: "(Department of Education, 2022)",
+                referenceList: "Department of Education (2022) <i>Annual Report on Educational Outcomes</i>. Government Publication 2022-05. London: HMSO.",
+                explanation: "Include the department name, year, report title in italics, report number or series (if available), place of publication, and publisher."
+            },
+            {
+                type: "other",
+                title: "Conference Paper",
+                inTextCitation: "(Rodriguez and Lee, 2021)",
+                referenceList: "Rodriguez, M. and Lee, S. (2021) 'Artificial intelligence in education', <i>Proceedings of the International Conference on Educational Technology</i>, Barcelona, Spain, 15-17 September. New York: ACE Publishing, pp. 45-52.",
+                explanation: "Include the authors, year, paper title in single quotes, name of conference in italics, location and date of conference, place of publication, publisher, and page range."
+            }
+        ];
+
+        // Form fields for different source types
+        const formFields = {
+            book: [
+                {id: "authors", label: "Author(s)", placeholder: "e.g., Smith, J. or Smith, J. and Jones, A.", required: true},
+                {id: "year", label: "Year of Publication", type: "number", placeholder: "e.g., 2023", required: true},
+                {id: "title", label: "Book Title", placeholder: "e.g., The Complete Guide to Academic Writing", required: true},
+                {id: "edition", label: "Edition (if not first)", placeholder: "e.g., 2nd edn."},
+                {id: "place", label: "Place of Publication", placeholder: "e.g., London", required: true},
+                {id: "publisher", label: "Publisher", placeholder: "e.g., Academic Press", required: true}
+            ],
+            journal: [
+                {id: "authors", label: "Author(s)", placeholder: "e.g., Smith, J. or Smith, J. and Jones, A.", required: true},
+                {id: "year", label: "Year of Publication", type: "number", placeholder: "e.g., 2023", required: true},
+                {id: "article-title", label: "Article Title", placeholder: "e.g., The impact of social media on student learning", required: true},
+                {id: "journal-title", label: "Journal Title", placeholder: "e.g., Journal of Educational Technology", required: true},
+                {id: "volume", label: "Volume", placeholder: "e.g., 15", required: true},
+                {id: "issue", label: "Issue", placeholder: "e.g., 2", required: true},
+                {id: "pages", label: "Page Range", placeholder: "e.g., 75-89"},
+                {id: "doi", label: "DOI or URL", placeholder: "e.g., https://doi.org/10.1234/jet.2022.123456"}
+            ],
+            website: [
+                {id: "authors", label: "Author/Organization", placeholder: "e.g., World Health Organization", required: true},
+                {id: "year", label: "Year", type: "number", placeholder: "e.g., 2023", required: true},
+                {id: "title", label: "Page Title", placeholder: "e.g., Mental health in the workplace", required: true},
+                {id: "url", label: "URL", placeholder: "e.g., https://www.who.int/mental-health/workplace", required: true},
+                {id: "accessed", label: "Date Accessed", type: "date", required: true}
+            ],
+            newspaper: [
+                {id: "authors", label: "Author(s)", placeholder: "e.g., Thompson, P.", required: true},
+                {id: "year", label: "Year", type: "number", placeholder: "e.g., 2023", required: true},
+                {id: "article-title", label: "Article Title", placeholder: "e.g., Economic outlook remains uncertain", required: true},
+                {id: "newspaper", label: "Newspaper Name", placeholder: "e.g., The Daily News", required: true},
+                {id: "date", label: "Publication Date", type: "date", required: true},
+                {id: "page", label: "Page Number", placeholder: "e.g., 4"},
+                {id: "url", label: "URL (if online)", placeholder: "e.g., https://www.thedailynews.com/article"},
+                {id: "accessed", label: "Date Accessed (if online)", type: "date"}
+            ],
+            ebook: [
+                {id: "authors", label: "Author(s)", placeholder: "e.g., Johnson, M.", required: true},
+                {id: "year", label: "Year of Publication", type: "number", placeholder: "e.g., 2021", required: true},
+                {id: "title", label: "Book Title", placeholder: "e.g., Digital Learning Strategies", required: true},
+                {id: "edition", label: "Edition (if not first)", placeholder: "e.g., 2nd edn."},
+                {id: "doi", label: "DOI or URL", placeholder: "e.g., https://doi.org/10.4324/9780429456789", required: true},
+                {id: "accessed", label: "Date Accessed", type: "date", required: true}
+            ]
+        };
+        
+        // Sample citation questions
+        const sampleQuestions = [
+            "How do I cite a YouTube video in Harvard style?",
+            "What's the correct format for citing a chapter in an edited book?",
+            "How do I reference a podcast episode?",
+            "What's the proper way to cite multiple works by the same author?",
+            "How do I reference a translated book?",
+            "What's the format for citing an interview I conducted?",
+            "How do I cite a source with no author?",
+            "What's the correct way to cite social media posts?"
+        ];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab functionality
+            initTabs();
+            
+            // Initialize the forms and examples
+            updateFormFields('book');
+            populateExamples('all');
+            setupReferenceGenerator();
+            
+            // Set up Ask tab
+            setupAskTab();
+        });
+        
+        // Set up tabs
+        function initTabs() {
+            const tabs = document.querySelectorAll('#tabs button');
+            const tabContents = document.querySelectorAll('.tab-pane');
+            
+            // Set initial active tab
+            document.getElementById('guide-tab').classList.add('border-secondary', 'text-secondary', 'dark:border-secondary-light', 'dark:text-secondary-light');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active state from all tabs
+                    tabs.forEach(t => {
+                        t.classList.remove('border-secondary', 'text-secondary', 'dark:border-secondary-light', 'dark:text-secondary-light');
+                        t.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                    });
+                    
+                    // Add active state to clicked tab
+                    tab.classList.add('border-secondary', 'text-secondary', 'dark:border-secondary-light', 'dark:text-secondary-light');
+                    tab.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    
+                    // Show the selected tab content
+                    const tabId = tab.getAttribute('aria-controls');
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+        }
+        
+        // Update form fields based on source type
+        function updateFormFields(sourceType) {
+            const container = document.getElementById('form-fields');
+            container.innerHTML = '';
+            
+            formFields[sourceType].forEach(field => {
+                const fieldDiv = document.createElement('div');
+                
+                const label = document.createElement('label');
+                label.setAttribute('for', field.id);
+                label.className = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1';
+                label.textContent = field.label + (field.required ? ' *' : '');
+                
+                let input;
+                if (field.type === 'date') {
+                    input = document.createElement('input');
+                    input.type = 'date';
+                    input.className = 'w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base';
+                } else if (field.type === 'number') {
+                    input = document.createElement('input');
+                    input.type = 'number';
+                    input.min = 1900;
+                    input.max = new Date().getFullYear();
+                    input.className = 'w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base';
+                } else {
+                    input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base';
+                }
+                
+                input.id = field.id;
+                input.placeholder = field.placeholder || '';
+                input.required = field.required || false;
+                
+                fieldDiv.appendChild(label);
+                fieldDiv.appendChild(input);
+                container.appendChild(fieldDiv);
+            });
+        }
+        
+        // Populate reference examples
+        function populateExamples(filterType) {
+            const container = document.getElementById('examples-container');
+            container.innerHTML = '';
+            
+            const filteredExamples = filterType === 'all' 
+                ? referenceExamples 
+                : referenceExamples.filter(example => example.type === filterType);
+            
+            filteredExamples.forEach(example => {
+                const exampleDiv = document.createElement('div');
+                exampleDiv.className = 'paper bg-white dark:bg-gray-800 rounded-lg p-5 border-2 border-dotted border-secondary';
+                
+                exampleDiv.innerHTML = `
+                    <h3 class="text-lg font-semibold mb-3">${example.title}</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-sm text-gray-500 dark:text-gray-400">IN-TEXT CITATION</h4>
+                            <p class="p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600 mt-2">
+                                ${example.inTextCitation}
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-sm text-gray-500 dark:text-gray-400">REFERENCE LIST ENTRY</h4>
+                            <p class="p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-600 mt-2">
+                                ${example.referenceList}
+                            </p>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                            <h4 class="font-medium text-blue-800 dark:text-blue-300">Note:</h4>
+                            <p class="text-blue-700 dark:text-blue-200 text-sm mt-1">${example.explanation}</p>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(exampleDiv);
+            });
+        }
+        
+        // Set up reference generator
+        function setupReferenceGenerator() {
+            const sourceTypeSelect = document.getElementById('source-type');
+            const generateButton = document.getElementById('generate-button');
+            const referenceOutput = document.getElementById('reference-output');
+            const inTextCitation = document.getElementById('in-text-citation');
+            const referenceListEntry = document.getElementById('reference-list-entry');
+            const copyButton = document.getElementById('copy-reference');
+            
+            // Update form when source type changes
+            sourceTypeSelect.addEventListener('change', () => {
+                updateFormFields(sourceTypeSelect.value);
+                referenceOutput.classList.add('hidden');
+            });
+            
+            // Generate reference when button is clicked
+            generateButton.addEventListener('click', () => {
+                // Validate required fields
+                const requiredFields = document.querySelectorAll('#form-fields input[required]');
+                let allValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('border-red-500');
+                        allValid = false;
+                    } else {
+                        field.classList.remove('border-red-500');
+                    }
+                });
+                
+                if (!allValid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Generate the reference based on source type
+                const sourceType = sourceTypeSelect.value;
+                
+                let citation = '';
+                let reference = '';
+                
+                switch(sourceType) {
+                    case 'book':
+                        citation = generateBookCitation();
+                        reference = generateBookReference();
+                        break;
+                    case 'journal':
+                        citation = generateJournalCitation();
+                        reference = generateJournalReference();
+                        break;
+                    case 'website':
+                        citation = generateWebsiteCitation();
+                        reference = generateWebsiteReference();
+                        break;
+                    case 'newspaper':
+                        citation = generateNewspaperCitation();
+                        reference = generateNewspaperReference();
+                        break;
+                    case 'ebook':
+                        citation = generateEbookCitation();
+                        reference = generateEbookReference();
+                        break;
+                }
+                
+                // Display the reference
+                inTextCitation.textContent = citation;
+                referenceListEntry.innerHTML = reference;
+                referenceOutput.classList.remove('hidden');
+            });
+            
+            // Copy reference when button is clicked
+            copyButton.addEventListener('click', () => {
+                const textToCopy = `In-text Citation: ${inTextCitation.textContent}\n\nReference List Entry: ${referenceListEntry.innerText}`;
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalText = copyButton.innerHTML;
+                    copyButton.innerHTML = `
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Copied!
+                    `;
+                    setTimeout(() => {
+                        copyButton.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        }
+        
+        // Helper function to format author names for citations
+        function formatCitationAuthors(authorsString) {
+            const authors = authorsString.split(/,\s*|\s+and\s+/).filter(author => author.trim() !== '');
+            
+            if (authors.length === 1) {
+                // Extract surname for a single author
+                const nameParts = authors[0].split(',');
+                return nameParts[0].trim();
+            } else if (authors.length === 2) {
+                // Two authors: Surname1 and Surname2
+                const author1 = authors[0].split(',')[0].trim();
+                const author2 = authors[1].split(',')[0].trim();
+                return `${author1} and ${author2}`;
+            } else {
+                // Three or more authors: Surname1 et al.
+                const firstAuthor = authors[0].split(',')[0].trim();
+                return `${firstAuthor} et al.`;
+            }
+        }
+        
+        // Generate book citation
+        function generateBookCitation() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            
+            return `(${formatCitationAuthors(authors)}, ${year})`;
+        }
+        
+        // Generate book reference
+        function generateBookReference() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            const title = document.getElementById('title').value;
+            const edition = document.getElementById('edition').value;
+            const place = document.getElementById('place').value;
+            const publisher = document.getElementById('publisher').value;
+            
+            let reference = `${authors} (${year}) <i>${title}</i>`;
+            
+            if (edition) {
+                reference += `. ${edition}`;
+            }
+            
+            reference += `. ${place}: ${publisher}.`;
+            
+            return reference;
+        }
+        
+        // Generate journal citation
+        function generateJournalCitation() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            
+            return `(${formatCitationAuthors(authors)}, ${year})`;
+        }
+        
+        // Generate journal reference
+        function generateJournalReference() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            const articleTitle = document.getElementById('article-title').value;
+            const journalTitle = document.getElementById('journal-title').value;
+            const volume = document.getElementById('volume').value;
+            const issue = document.getElementById('issue').value;
+            const pages = document.getElementById('pages').value;
+            const doi = document.getElementById('doi').value;
+            
+            let reference = `${authors} (${year}) '${articleTitle}', <i>${journalTitle}</i>, ${volume}(${issue})`;
+            
+            if (pages) {
+                reference += `, pp. ${pages}`;
+            }
+            
+            if (doi) {
+                if (doi.startsWith('http')) {
+                    reference += `. Available at: ${doi}`;
+                    
+                    // Add accessed date for URLs that aren't DOIs
+                    if (!doi.includes('doi.org')) {
+                        const today = new Date().toLocaleDateString('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                        reference += ` (Accessed: ${today})`;
+                    } else {
+                        reference += `.`;
+                    }
+                } else {
+                    reference += `. doi: ${doi}`;
+                }
+            } else {
+                reference += `.`;
+            }
+            
+            return reference;
+        }
+        
+        // Generate website citation
+        function generateWebsiteCitation() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            
+            return `(${formatCitationAuthors(authors)}, ${year})`;
+        }
+        
+        // Generate website reference
+        function generateWebsiteReference() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            const title = document.getElementById('title').value;
+            const url = document.getElementById('url').value;
+            const accessed = document.getElementById('accessed').value;
+            
+            const accessDate = new Date(accessed).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            return `${authors} (${year}) <i>${title}</i>. Available at: ${url} (Accessed: ${accessDate}).`;
+        }
+        
+        // Generate newspaper citation
+        function generateNewspaperCitation() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            
+            return `(${formatCitationAuthors(authors)}, ${year})`;
+        }
+        
+        // Generate newspaper reference
+        function generateNewspaperReference() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            const articleTitle = document.getElementById('article-title').value;
+            const newspaper = document.getElementById('newspaper').value;
+            const date = document.getElementById('date').value;
+            const page = document.getElementById('page').value;
+            const url = document.getElementById('url').value;
+            const accessed = document.getElementById('accessed').value;
+            
+            const publicationDate = new Date(date).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            let reference = `${authors} (${year}) '${articleTitle}', <i>${newspaper}</i>, ${publicationDate}`;
+            
+            if (page) {
+                reference += `, p. ${page}`;
+            }
+            
+            if (url) {
+                reference += `. Available at: ${url}`;
+                
+                if (accessed) {
+                    const accessDate = new Date(accessed).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    
+                    reference += ` (Accessed: ${accessDate})`;
+                }
+            }
+            
+            reference += `.`;
+            
+            return reference;
+        }
+        
+        // Generate ebook citation
+        function generateEbookCitation() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            
+            return `(${formatCitationAuthors(authors)}, ${year})`;
+        }
+        
+        // Generate ebook reference
+        function generateEbookReference() {
+            const authors = document.getElementById('authors').value;
+            const year = document.getElementById('year').value;
+            const title = document.getElementById('title').value;
+            const edition = document.getElementById('edition').value;
+            const doi = document.getElementById('doi').value;
+            const accessed = document.getElementById('accessed').value;
+            
+            const accessDate = new Date(accessed).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            let reference = `${authors} (${year}) <i>${title}</i>`;
+            
+            if (edition) {
+                reference += `. ${edition}`;
+            }
+            
+            reference += `. Available at: ${doi} (Accessed: ${accessDate}).`;
+            
+            return reference;
+        }
+        
+        // Set up the Ask tab
+        function setupAskTab() {
+            const questionInput = document.getElementById('citation-question');
+            const askButton = document.getElementById('ask-button');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const answerContainer = document.getElementById('answer-container');
+            const answerContent = document.getElementById('answer-content');
+            
+            // Set random placeholder from sample questions
+            const randomQuestion = sampleQuestions[Math.floor(Math.random() * sampleQuestions.length)];
+            questionInput.placeholder = randomQuestion;
+            
+            // Add chips for sample questions
+            const sampleQuestionsDiv = document.createElement('div');
+            sampleQuestionsDiv.className = 'flex flex-wrap gap-2 mb-4';
+            
+            // Get 3 random questions
+            const randomQuestions = [...sampleQuestions]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3);
+            
+            randomQuestions.forEach(question => {
+                const chip = document.createElement('button');
+                chip.className = 'px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm transition-colors';
+                chip.textContent = question;
+                chip.addEventListener('click', () => {
+                    questionInput.value = question;
+                    questionInput.focus();
+                });
+                sampleQuestionsDiv.appendChild(chip);
+            });
+            
+            const labelElement = document.querySelector('label[for="citation-question"]');
+            if (labelElement) {
+                labelElement.after(sampleQuestionsDiv);
+            }
+            
+            // Handle form submission
+            askButton.addEventListener('click', async () => {
+                const question = questionInput.value.trim();
+                
+                if (!question) {
+                    alert('Please enter a question about Harvard referencing.');
+                    return;
+                }
+                
+                answerContainer.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
+                
+                // Check if window.Poe exists
+                if (!window.Poe) {
+                    loadingIndicator.classList.add('hidden');
+                    answerContainer.classList.remove('hidden');
+                    answerContent.innerHTML = `
+                        <div class="p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg mb-4">
+                            <p class="text-yellow-800 dark:text-yellow-200 font-medium">This feature requires the Poe API to function.</p>
+                            <p class="text-yellow-700 dark:text-yellow-300 mt-2">It looks like the Poe API isn't available. This app must be run as a Poe Canvas app.</p>
+                        </div>
+                        <p>Your question was: <strong>${question}</strong></p>
+                    `;
+                    return;
+                }
+                
+                // Register handler for Claude responses
+                window.Poe.registerHandler("harvard-citation-handler", (result, context) => {
+                    loadingIndicator.classList.add('hidden');
+                    answerContainer.classList.remove('hidden');
+                    
+                    if (!result.responses || result.responses.length === 0) {
+                        answerContent.innerHTML = `<p class="text-red-500">Error: No response received</p>`;
+                        return;
+                    }
+                    
+                    const response = result.responses[0];
+                    
+                    if (response.status === "error") {
+                        answerContent.innerHTML = `<p class="text-red-500">Error: ${response.statusText || "Failed to get response"}</p>`;
+                    } else if (response.status === "incomplete" || response.status === "complete") {
+                        try {
+                            // Use marked.js to render markdown
+                            answerContent.innerHTML = marked.parse(response.content);
+                            
+                            // Make sure links open in new tab
+                            const links = answerContent.querySelectorAll('a');
+                            links.forEach(link => {
+                                link.setAttribute('target', '_blank');
+                                link.setAttribute('rel', 'noopener noreferrer');
+                            });
+                        } catch (err) {
+                            console.error("Error parsing markdown:", err);
+                            answerContent.textContent = response.content;
+                        }
+                    }
+                });
+                
+                try {
+                    await window.Poe.sendUserMessage(
+                        `@Claude-3.7-Sonnet I have a question about Harvard referencing: ${question}
+
+Please provide a detailed explanation focusing on:
+1. The correct Harvard format for this citation type
+2. Examples of both in-text citations and reference list entries
+3. Any special considerations or variations
+4. Common mistakes to avoid
+
+If there are differences between Harvard referencing styles at different institutions, please mention the most common approach but note that there can be variations.`,
+                        {
+                            handler: "harvard-citation-handler",
+                            stream: true,
+                            openChat: false
+                        }
+                    );
+                } catch (err) {
+                    loadingIndicator.classList.add('hidden');
+                    answerContainer.classList.remove('hidden');
+                    answerContent.innerHTML = `<p class="text-red-500">Error: ${err.message || "Failed to send message"}</p>`;
+                }
+            });
+            
+            // Allow submitting by pressing Enter (with Shift+Enter for newlines)
+            questionInput.addEventListener('keydown', event => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    askButton.click();
+                }
+            });
+        }
+        
+        // Filter examples when dropdown changes
+        document.getElementById('example-filter').addEventListener('change', (e) => {
+            populateExamples(e.target.value);
+        });
+    </script>
+</body>
+</html>
