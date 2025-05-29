@@ -28,7 +28,6 @@
             }
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -120,11 +119,6 @@
                     <li class="mr-2" role="presentation">
                         <button id="examples-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="examples" aria-selected="false">
                             Examples
-                        </button>
-                    </li>
-                    <li role="presentation">
-                        <button id="ask-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="ask" aria-selected="false">
-                            Ask About Citations
                         </button>
                     </li>
                 </ul>
@@ -311,44 +305,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Ask About Citations Tab -->
-                <div id="ask" class="tab-pane hidden" role="tabpanel" aria-labelledby="ask-tab">
-                    <div class="paper bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <h2 class="text-2xl font-bold mb-4 text-secondary dark:text-secondary-light">Ask About Citations</h2>
-                        <p class="mb-5">Have a specific question about Harvard referencing? Ask Claude AI for help.</p>
-                        
-                        <div class="mb-6">
-                            <label for="citation-question" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Citation Question:</label>
-                            <textarea 
-                                id="citation-question" 
-                                placeholder="For example: How do I cite a YouTube video? How do I reference a chapter in an edited book?"
-                                class="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base min-h-[150px] resize-y focus:outline-none focus:ring-2 focus:ring-secondary"
-                            ></textarea>
-                        </div>
-                        
-                        <div class="mb-8">
-                            <button 
-                                id="ask-button" 
-                                class="w-full py-3 px-6 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-lg transition-colors duration-200"
-                            >
-                                Get Citation Help
-                            </button>
-                        </div>
-                        
-                        <div id="loading-indicator" class="hidden">
-                            <div class="flex items-center justify-center p-6">
-                                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-secondary"></div>
-                            </div>
-                            <p class="text-center text-gray-500 dark:text-gray-400">Getting expert citation advice...</p>
-                        </div>
-                        
-                        <div id="answer-container" class="mt-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 hidden">
-                            <h3 class="font-semibold text-xl mb-4">Citation Help:</h3>
-                            <div id="answer-content" class="prose prose-lg max-w-none dark:prose-invert overflow-auto"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </main>
 
@@ -513,20 +469,6 @@
                 {id: "accessed", label: "Date Accessed (if online)", type: "date"}
             ]
         };
-        
-        // Sample citation questions
-        const sampleQuestions = [
-            "How do I cite a YouTube video in Harvard style?",
-            "What's the correct format for citing a chapter in an edited book?",
-            "How do I reference a podcast episode?",
-            "What's the proper way to cite multiple works by the same author?",
-            "How do I reference a translated book?",
-            "What's the format for citing an interview I conducted?",
-            "How do I cite a source with no author?",
-            "What's the correct way to cite social media posts?",
-            "How do I reference an artist's installation artwork?",
-            "What's the proper format for citing a design portfolio?"
-        ];
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
@@ -537,9 +479,6 @@
             updateFormFields('book');
             populateExamples('all');
             setupReferenceGenerator();
-            
-            // Set up Ask tab
-            setupAskTab();
         });
         
         // Set up tabs
@@ -1013,134 +952,6 @@
             }
             
             return reference;
-        }
-        
-        // Set up the Ask tab
-        function setupAskTab() {
-            const questionInput = document.getElementById('citation-question');
-            const askButton = document.getElementById('ask-button');
-            const loadingIndicator = document.getElementById('loading-indicator');
-            const answerContainer = document.getElementById('answer-container');
-            const answerContent = document.getElementById('answer-content');
-            
-            // Set random placeholder from sample questions
-            const randomQuestion = sampleQuestions[Math.floor(Math.random() * sampleQuestions.length)];
-            questionInput.placeholder = randomQuestion;
-            
-            // Add chips for sample questions
-            const sampleQuestionsDiv = document.createElement('div');
-            sampleQuestionsDiv.className = 'flex flex-wrap gap-2 mb-4';
-            
-            // Get 3 random questions
-            const randomQuestions = [...sampleQuestions]
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 3);
-            
-            randomQuestions.forEach(question => {
-                const chip = document.createElement('button');
-                chip.className = 'px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm transition-colors';
-                chip.textContent = question;
-                chip.addEventListener('click', () => {
-                    questionInput.value = question;
-                    questionInput.focus();
-                });
-                sampleQuestionsDiv.appendChild(chip);
-            });
-            
-            const labelElement = document.querySelector('label[for="citation-question"]');
-            if (labelElement) {
-                labelElement.after(sampleQuestionsDiv);
-            }
-            
-            // Handle form submission
-            askButton.addEventListener('click', async () => {
-                const question = questionInput.value.trim();
-                
-                if (!question) {
-                    alert('Please enter a question about Harvard referencing.');
-                    return;
-                }
-                
-                answerContainer.classList.add('hidden');
-                loadingIndicator.classList.remove('hidden');
-                
-                // Check if window.Poe exists
-                if (!window.Poe) {
-                    loadingIndicator.classList.add('hidden');
-                    answerContainer.classList.remove('hidden');
-                    answerContent.innerHTML = `
-                        <div class="p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg mb-4">
-                            <p class="text-yellow-800 dark:text-yellow-200 font-medium">This feature requires the Poe API to function.</p>
-                            <p class="text-yellow-700 dark:text-yellow-300 mt-2">It looks like the Poe API isn't available. This app must be run as a Poe Canvas app.</p>
-                        </div>
-                        <p>Your question was: <strong>${question}</strong></p>
-                    `;
-                    return;
-                }
-                
-                // Register handler for Claude responses
-                window.Poe.registerHandler("harvard-citation-handler", (result, context) => {
-                    loadingIndicator.classList.add('hidden');
-                    answerContainer.classList.remove('hidden');
-                    
-                    if (!result.responses || result.responses.length === 0) {
-                        answerContent.innerHTML = `<p class="text-red-500">Error: No response received</p>`;
-                        return;
-                    }
-                    
-                    const response = result.responses[0];
-                    
-                    if (response.status === "error") {
-                        answerContent.innerHTML = `<p class="text-red-500">Error: ${response.statusText || "Failed to get response"}</p>`;
-                    } else if (response.status === "incomplete" || response.status === "complete") {
-                        try {
-                            // Use marked.js to render markdown
-                            answerContent.innerHTML = marked.parse(response.content);
-                            
-                            // Make sure links open in new tab
-                            const links = answerContent.querySelectorAll('a');
-                            links.forEach(link => {
-                                link.setAttribute('target', '_blank');
-                                link.setAttribute('rel', 'noopener noreferrer');
-                            });
-                        } catch (err) {
-                            console.error("Error parsing markdown:", err);
-                            answerContent.textContent = response.content;
-                        }
-                    }
-                });
-                
-                try {
-                    await window.Poe.sendUserMessage(
-                        `@Claude-3.7-Sonnet I have a question about Harvard referencing: ${question}
-
-Please provide a detailed explanation focusing on:
-1. The correct Harvard format for this citation type
-2. Examples of both in-text citations and reference list entries
-3. Any special considerations or variations
-4. Common mistakes to avoid
-
-If there are differences between Harvard referencing styles at different institutions, please mention the most common approach but note that there can be variations.`,
-                        {
-                            handler: "harvard-citation-handler",
-                            stream: true,
-                            openChat: false
-                        }
-                    );
-                } catch (err) {
-                    loadingIndicator.classList.add('hidden');
-                    answerContainer.classList.remove('hidden');
-                    answerContent.innerHTML = `<p class="text-red-500">Error: ${err.message || "Failed to send message"}</p>`;
-                }
-            });
-            
-            // Allow submitting by pressing Enter (with Shift+Enter for newlines)
-            questionInput.addEventListener('keydown', event => {
-                if (event.key === 'Enter' && !event.shiftKey) {
-                    event.preventDefault();
-                    askButton.click();
-                }
-            });
         }
         
         // Filter examples when dropdown changes
