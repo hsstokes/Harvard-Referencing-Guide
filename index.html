@@ -122,6 +122,11 @@
                             Examples
                         </button>
                     </li>
+                    <li role="presentation">
+                        <button id="ask-tab" class="inline-block p-4 border-b-2 rounded-t-lg" type="button" role="tab" aria-controls="ask" aria-selected="false">
+                            Ask About Citations
+                        </button>
+                    </li>
                 </ul>
             </div>
             
@@ -247,6 +252,7 @@
                                 <option value="website">Website</option>
                                 <option value="newspaper">Newspaper Article</option>
                                 <option value="ebook">E-Book</option>
+                                <option value="artwork">Artwork/Design</option>
                             </select>
                         </div>
                         
@@ -295,12 +301,51 @@
                                 <option value="journal">Journal Articles</option>
                                 <option value="website">Websites</option>
                                 <option value="newspaper">Newspaper Articles</option>
+                                <option value="artwork">Artwork/Design</option>
                                 <option value="other">Other Sources</option>
                             </select>
                         </div>
                         
                         <div id="examples-container" class="space-y-6 mt-6">
                             <!-- Examples will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ask About Citations Tab -->
+                <div id="ask" class="tab-pane hidden" role="tabpanel" aria-labelledby="ask-tab">
+                    <div class="paper bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold mb-4 text-secondary dark:text-secondary-light">Ask About Citations</h2>
+                        <p class="mb-5">Have a specific question about Harvard referencing? Ask Claude AI for help.</p>
+                        
+                        <div class="mb-6">
+                            <label for="citation-question" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Citation Question:</label>
+                            <textarea 
+                                id="citation-question" 
+                                placeholder="For example: How do I cite a YouTube video? How do I reference a chapter in an edited book?"
+                                class="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base min-h-[150px] resize-y focus:outline-none focus:ring-2 focus:ring-secondary"
+                            ></textarea>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <button 
+                                id="ask-button" 
+                                class="w-full py-3 px-6 bg-secondary hover:bg-secondary-light text-white font-semibold rounded-lg transition-colors duration-200"
+                            >
+                                Get Citation Help
+                            </button>
+                        </div>
+                        
+                        <div id="loading-indicator" class="hidden">
+                            <div class="flex items-center justify-center p-6">
+                                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-secondary"></div>
+                            </div>
+                            <p class="text-center text-gray-500 dark:text-gray-400">Getting expert citation advice...</p>
+                        </div>
+                        
+                        <div id="answer-container" class="mt-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900 hidden">
+                            <h3 class="font-semibold text-xl mb-4">Citation Help:</h3>
+                            <div id="answer-content" class="prose prose-lg max-w-none dark:prose-invert overflow-auto"></div>
                         </div>
                     </div>
                 </div>
@@ -375,6 +420,27 @@
                 explanation: "For online newspaper articles, include the URL and access date."
             },
             {
+                type: "artwork",
+                title: "Artwork in a Museum/Gallery",
+                inTextCitation: "(Picasso, 1937)",
+                referenceList: "Picasso, P. (1937) <i>Guernica</i> [Oil on canvas]. Madrid: Museo Reina Sofía.",
+                explanation: "Include the artist's surname and initials, year of creation, title in italics, medium in square brackets, location, and gallery/museum."
+            },
+            {
+                type: "artwork",
+                title: "Online Artwork/Design",
+                inTextCitation: "(Kawaguchi, 2021)",
+                referenceList: "Kawaguchi, H. (2021) <i>Urban Future</i> [Digital illustration]. Available at: https://www.behance.net/gallery/example (Accessed: 12 April 2023).",
+                explanation: "For online artworks, include the artist's name, year, title, medium, URL, and access date."
+            },
+            {
+                type: "artwork",
+                title: "Design in a Published Book",
+                inTextCitation: "(Rand, 1985)",
+                referenceList: "Rand, P. (1985) <i>IBM Logo</i> [Corporate identity]. In: Meggs, P. (2016) <i>History of Graphic Design</i>. 6th edn. Hoboken: Wiley, p. 437.",
+                explanation: "For designs/artworks in published sources, include the designer's name, year, title, medium, and the book's publication details."
+            },
+            {
                 type: "other",
                 title: "Government Report",
                 inTextCitation: "(Department of Education, 2022)",
@@ -434,8 +500,33 @@
                 {id: "edition", label: "Edition (if not first)", placeholder: "e.g., 2nd edn."},
                 {id: "doi", label: "DOI or URL", placeholder: "e.g., https://doi.org/10.4324/9780429456789", required: true},
                 {id: "accessed", label: "Date Accessed", type: "date", required: true}
+            ],
+            artwork: [
+                {id: "artist", label: "Artist/Designer Name", placeholder: "e.g., Picasso, P. or Rand, P.", required: true},
+                {id: "year", label: "Year Created", type: "number", placeholder: "e.g., 1937", required: true},
+                {id: "title", label: "Title of Work", placeholder: "e.g., Guernica or IBM Logo", required: true},
+                {id: "medium", label: "Medium/Materials", placeholder: "e.g., Oil on canvas, Digital illustration, Corporate identity", required: true},
+                {id: "location", label: "Location/Gallery/Museum", placeholder: "e.g., Madrid: Museo Reina Sofía"},
+                {id: "book-source", label: "Book Source (if in a book)", placeholder: "e.g., Meggs, P. (2016) History of Graphic Design"},
+                {id: "page", label: "Page Number (if in a book)", placeholder: "e.g., 437"},
+                {id: "url", label: "URL (if online)", placeholder: "e.g., https://www.moma.org/collection/works/123456"},
+                {id: "accessed", label: "Date Accessed (if online)", type: "date"}
             ]
         };
+        
+        // Sample citation questions
+        const sampleQuestions = [
+            "How do I cite a YouTube video in Harvard style?",
+            "What's the correct format for citing a chapter in an edited book?",
+            "How do I reference a podcast episode?",
+            "What's the proper way to cite multiple works by the same author?",
+            "How do I reference a translated book?",
+            "What's the format for citing an interview I conducted?",
+            "How do I cite a source with no author?",
+            "What's the correct way to cite social media posts?",
+            "How do I reference an artist's installation artwork?",
+            "What's the proper format for citing a design portfolio?"
+        ];
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
@@ -446,6 +537,9 @@
             updateFormFields('book');
             populateExamples('all');
             setupReferenceGenerator();
+            
+            // Set up Ask tab
+            setupAskTab();
         });
         
         // Set up tabs
@@ -623,6 +717,10 @@
                     case 'ebook':
                         citation = generateEbookCitation();
                         reference = generateEbookReference();
+                        break;
+                    case 'artwork':
+                        citation = generateArtworkCitation();
+                        reference = generateArtworkReference();
                         break;
                 }
                 
@@ -856,6 +954,193 @@
             reference += `. Available at: ${doi} (Accessed: ${accessDate}).`;
             
             return reference;
+        }
+        
+        // Generate artwork citation
+        function generateArtworkCitation() {
+            const artist = document.getElementById('artist').value;
+            const year = document.getElementById('year').value;
+            
+            // Extract surname for citation
+            const artistSurname = artist.split(',')[0].trim();
+            
+            return `(${artistSurname}, ${year})`;
+        }
+        
+        // Generate artwork reference
+        function generateArtworkReference() {
+            const artist = document.getElementById('artist').value;
+            const year = document.getElementById('year').value;
+            const title = document.getElementById('title').value;
+            const medium = document.getElementById('medium').value;
+            const location = document.getElementById('location').value;
+            const bookSource = document.getElementById('book-source').value;
+            const page = document.getElementById('page').value;
+            const url = document.getElementById('url').value;
+            const accessed = document.getElementById('accessed').value;
+            
+            let reference = `${artist} (${year}) <i>${title}</i> [${medium}]`;
+            
+            // For physical artwork in a gallery/museum
+            if (location && !bookSource && !url) {
+                reference += `. ${location}.`;
+            }
+            // For artwork in a book
+            else if (bookSource) {
+                reference += `. In: ${bookSource}`;
+                if (page) {
+                    reference += `, p. ${page}`;
+                }
+                reference += `.`;
+            }
+            // For online artwork
+            else if (url) {
+                reference += `. Available at: ${url}`;
+                
+                if (accessed) {
+                    const accessDate = new Date(accessed).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    reference += ` (Accessed: ${accessDate})`;
+                }
+                reference += `.`;
+            }
+            // Basic fallback
+            else {
+                reference += `.`;
+            }
+            
+            return reference;
+        }
+        
+        // Set up the Ask tab
+        function setupAskTab() {
+            const questionInput = document.getElementById('citation-question');
+            const askButton = document.getElementById('ask-button');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const answerContainer = document.getElementById('answer-container');
+            const answerContent = document.getElementById('answer-content');
+            
+            // Set random placeholder from sample questions
+            const randomQuestion = sampleQuestions[Math.floor(Math.random() * sampleQuestions.length)];
+            questionInput.placeholder = randomQuestion;
+            
+            // Add chips for sample questions
+            const sampleQuestionsDiv = document.createElement('div');
+            sampleQuestionsDiv.className = 'flex flex-wrap gap-2 mb-4';
+            
+            // Get 3 random questions
+            const randomQuestions = [...sampleQuestions]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3);
+            
+            randomQuestions.forEach(question => {
+                const chip = document.createElement('button');
+                chip.className = 'px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm transition-colors';
+                chip.textContent = question;
+                chip.addEventListener('click', () => {
+                    questionInput.value = question;
+                    questionInput.focus();
+                });
+                sampleQuestionsDiv.appendChild(chip);
+            });
+            
+            const labelElement = document.querySelector('label[for="citation-question"]');
+            if (labelElement) {
+                labelElement.after(sampleQuestionsDiv);
+            }
+            
+            // Handle form submission
+            askButton.addEventListener('click', async () => {
+                const question = questionInput.value.trim();
+                
+                if (!question) {
+                    alert('Please enter a question about Harvard referencing.');
+                    return;
+                }
+                
+                answerContainer.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
+                
+                // Check if window.Poe exists
+                if (!window.Poe) {
+                    loadingIndicator.classList.add('hidden');
+                    answerContainer.classList.remove('hidden');
+                    answerContent.innerHTML = `
+                        <div class="p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg mb-4">
+                            <p class="text-yellow-800 dark:text-yellow-200 font-medium">This feature requires the Poe API to function.</p>
+                            <p class="text-yellow-700 dark:text-yellow-300 mt-2">It looks like the Poe API isn't available. This app must be run as a Poe Canvas app.</p>
+                        </div>
+                        <p>Your question was: <strong>${question}</strong></p>
+                    `;
+                    return;
+                }
+                
+                // Register handler for Claude responses
+                window.Poe.registerHandler("harvard-citation-handler", (result, context) => {
+                    loadingIndicator.classList.add('hidden');
+                    answerContainer.classList.remove('hidden');
+                    
+                    if (!result.responses || result.responses.length === 0) {
+                        answerContent.innerHTML = `<p class="text-red-500">Error: No response received</p>`;
+                        return;
+                    }
+                    
+                    const response = result.responses[0];
+                    
+                    if (response.status === "error") {
+                        answerContent.innerHTML = `<p class="text-red-500">Error: ${response.statusText || "Failed to get response"}</p>`;
+                    } else if (response.status === "incomplete" || response.status === "complete") {
+                        try {
+                            // Use marked.js to render markdown
+                            answerContent.innerHTML = marked.parse(response.content);
+                            
+                            // Make sure links open in new tab
+                            const links = answerContent.querySelectorAll('a');
+                            links.forEach(link => {
+                                link.setAttribute('target', '_blank');
+                                link.setAttribute('rel', 'noopener noreferrer');
+                            });
+                        } catch (err) {
+                            console.error("Error parsing markdown:", err);
+                            answerContent.textContent = response.content;
+                        }
+                    }
+                });
+                
+                try {
+                    await window.Poe.sendUserMessage(
+                        `@Claude-3.7-Sonnet I have a question about Harvard referencing: ${question}
+
+Please provide a detailed explanation focusing on:
+1. The correct Harvard format for this citation type
+2. Examples of both in-text citations and reference list entries
+3. Any special considerations or variations
+4. Common mistakes to avoid
+
+If there are differences between Harvard referencing styles at different institutions, please mention the most common approach but note that there can be variations.`,
+                        {
+                            handler: "harvard-citation-handler",
+                            stream: true,
+                            openChat: false
+                        }
+                    );
+                } catch (err) {
+                    loadingIndicator.classList.add('hidden');
+                    answerContainer.classList.remove('hidden');
+                    answerContent.innerHTML = `<p class="text-red-500">Error: ${err.message || "Failed to send message"}</p>`;
+                }
+            });
+            
+            // Allow submitting by pressing Enter (with Shift+Enter for newlines)
+            questionInput.addEventListener('keydown', event => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    askButton.click();
+                }
+            });
         }
         
         // Filter examples when dropdown changes
